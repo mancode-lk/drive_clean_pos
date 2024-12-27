@@ -1,0 +1,50 @@
+body {
+    background-color: rgb(98, 89, 202);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.login-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+.login-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.login-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: rgb(98, 89, 202);
+}
+.login-header p {
+    color: rgb(50, 50, 50);
+}
+.login-form .form-group {
+    margin-bottom: 1rem;
+}
+.login-form .btn-primary {
+    background-color: rgb(98, 89, 202);
+    border-color: rgb(98, 89, 202);
+}
+.login-form .btn-primary:hover {
+    background-color: rgb(85, 77, 180);
+    border-color: rgb(85, 77, 180);
+}
+.icon {
+    margin-right: 0.5rem;
+    color: rgb(98, 89, 202);
+}
+.footer-text {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: rgb(120, 120, 120);
+}
