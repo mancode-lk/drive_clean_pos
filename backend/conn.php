@@ -13,6 +13,21 @@ $current_date_time = date('Y/m/d H:i:s');
 
 $conn = new mysqli($servername,$username,$password,$dbname);
 
+function getRole($role_id){
+  if($role_id ==1){
+    return "Admin";
+  }
+  else if($role_id ==2){
+    return "Staff";
+  }
+  else if($role_id ==3){
+    return "Viewer";
+  }
+  else{
+    return "ERROR";
+  }
+}
+
 function uploadImage($fileName,$filePath,$allowedList,$errorLocation){
 
   $img = $_FILES[$fileName];
