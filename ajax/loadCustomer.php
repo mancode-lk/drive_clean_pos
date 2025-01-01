@@ -31,8 +31,8 @@
       <td><?= $rowCus['city'] ?></td>
       <td><?= $rowCus['id_number'] ?></td>
       <td>
-        <button class="btn btn-warning btn-sm" onclick="openemployeeEditModal(<?= $id ?>)">Edit</button>
-        <button class="btn btn-danger btn-sm" onclick="removeEmployee(<?= $id ?>)">Delete</button>
+        <button class="btn btn-warning btn-sm" onclick="openCustomerEditModal(<?= $id ?>)">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="removeCustomer(<?= $id ?>)">Delete</button>
       </td>
     </tr>
   <?php $num++; } } ?>

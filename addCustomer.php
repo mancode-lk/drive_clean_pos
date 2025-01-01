@@ -127,26 +127,26 @@
         $('#loadCustomer').load('ajax/loadCustomer.php');
         
 
-        function openemployeeEditModal(id){
-          $('#employeeEditModal').modal('show');
-          $('#loadEmployeeForm').load('ajax/loadEditEmployeeForm.php',{
-            emp_id:id
+        function openCustomerEditModal(id){
+          $('#cutomerEditModal').modal('show');
+          $('#loadCustomerForm').load('ajax/loadEditCustomerForm.php',{
+            c_id:id
           });
         }
 
-        function removeEmployee(id) {
-          if (confirm('Are you sure you want to delete the employee?')) { // Fixed syntax
+        function removeCustomer(id) {
+          if (confirm('Are you sure you want to delete the Customer?')) { // Fixed syntax
             $.ajax({
-              url: 'backend/deleteEmployee.php',
+              url: 'backend/deleteCustomer.php',
               method: 'POST', // Use uppercase for consistency
               data: {
-                emp_id: id
+                c_id: id
               },
               success: function(resp) {
                 if (resp == 200) {
-                  $('#loadEmployee').load('ajax/loadEmployee.php');
+                    $('#loadCustomer').load('ajax/loadCustomer.php');
                 } else {
-                  alert('Failed to delete the employee. Please try again.');
+                  alert('Failed to delete the Customer. Please try again.');
                 }
               },
               error: function() {
