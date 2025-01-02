@@ -23,17 +23,23 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row">
-                            
+                          <div class="col-lg-6">
+                              <button class="btn btn-warning btn-SM" onclick="window.location.href='addVehicle.php'" type="button">
+                                <i class="bi bi-truck fs-5"></i> Add Vehicle
+                              </button>
+                          </div>
                             <div class="col-lg-6">
-                                <button class="btn btn-primary btn-small" type="button" onclick="window.location.href='addVehicle.php'">Add Vehicle</button>
+                                <button class="btn btn-primary btn-SM" onclick="window.location.href='bookings.php'" type="button">
+                                  <i class="bi bi-calendar fs-5"></i> Booking
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <?php 
+                </div> <hr>
+                <?php
                  if(isset($_SESSION['customer_added_success'])){
                     ?>
-                    
+
 
                 <div class="alert alert-success" role="alert">
                 Customer added Successfully
@@ -41,14 +47,14 @@
 
                 <?php
                 unset($_SESSION['customer_added_success']);
-                 } 
+                 }
                  ?>
 
 
-                 <?php 
+                 <?php
                  if(isset($_SESSION['customer_added_error'])){
                     ?>
-                    
+
 
                 <div class="alert alert-warning" role="alert">
                 Something went wrong!!!
@@ -56,7 +62,7 @@
 
                 <?php
                 unset($_SESSION['customer_added_error']);
-                 } 
+                 }
                  ?>
 
 
@@ -125,7 +131,7 @@
         <?php include("layout/footer.php"); ?>
         <script type="text/javascript">
         $('#loadCustomer').load('ajax/loadCustomer.php');
-        
+
 
         function openCustomerEditModal(id){
           $('#cutomerEditModal').modal('show');
@@ -158,4 +164,3 @@
 
 
         </script>
-

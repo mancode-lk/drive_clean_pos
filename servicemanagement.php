@@ -19,10 +19,10 @@
                     </div>
                 </div>
                 <!-- Page Header Close -->
-                 <?php 
+                 <?php
                  if(isset($_SESSION['Service_added_success'])){
                     ?>
-                    
+
 
                 <div class="alert alert-success" role="alert">
                 Service added Successfully
@@ -30,14 +30,14 @@
 
                 <?php
                 unset($_SESSION['Service_added_success']);
-                 } 
+                 }
                  ?>
 
 
-                 <?php 
+                 <?php
                  if(isset($_SESSION['Service_added_error'])){
                     ?>
-                    
+
 
                 <div class="alert alert-warning" role="alert">
                 Something went wrong!!!
@@ -45,7 +45,7 @@
 
                 <?php
                 unset($_SESSION['Service_added_error']);
-                 } 
+                 }
                  ?>
 
 
@@ -53,7 +53,7 @@
                   <div class="card-body">
                     <div class="container">
                       <div class="row">
-                        <div class="col-4">
+                        <div class="col-6">
                           <h5>Add Service</h5>
                           <form action="backend/add_service.php" method="post">
                             <div class="form-group">
@@ -62,15 +62,32 @@
                             </div>
                             <div class="form-group">
                               <label for="description">Description</label>
-                              <input type="text" id="description" name="description" class="form-control" required>
+                              <textarea name="description" class="form-control" id="description" rows="4" cols="80"></textarea>
                             </div>
                             <div class="form-group">
                               <label for="icon">Icon Image</label>
                               <select id="icon" name="icon" class="form-control" required>
                                 <option value="">Select Icon</option>
-                                <option value="1">image1</option>
-                                <option value="2">image2</option>
-                                <option value="3">image3</option>
+                                <option value="bi bi-droplet fs-1">Car Wash</option>
+                                <option value="bi bi-tools fs-1">Repair</option>
+                                <option value="bi bi-fuel-pump fs-1">Fuel Service</option>
+                                <option value="bi bi-speedometer fs-1">Oil Change</option>
+                                <option value="bi bi-battery-charging fs-1">Battery Service</option>
+                                <option value="bi bi-tire fs-1">Tire Change</option>
+                                <option value="bi bi-wrench fs-1">Engine Tune-Up</option>
+                                <option value="bi bi-snow fs-1">Air Conditioning Service</option>
+                                <option value="bi bi-clipboard-check fs-1">Inspection</option>
+                                <option value="bi bi-lightning fs-1">Electrical Repairs</option>
+                                <option value="bi bi-camera-video fs-1">Camera Calibration</option>
+                                <option value="bi bi-wind fs-1">Windshield Cleaning</option>
+                                <option value="bi bi-circle fs-1">Alignment</option>
+                                <option value="bi bi-brightness-high fs-1">Headlight Polishing</option>
+                                <option value="bi bi-shield-check fs-1">Safety Check</option>
+                                <option value="bi bi-airplane fs-1">Vehicle Shipping</option>
+                                <option value="bi bi-truck fs-1">Heavy Vehicle Service</option>
+                                <option value="bi bi-car-front fs-1">Interior Detailing</option>
+                                <option value="bi bi-box-arrow-in-down fs-1">Parts Replacement</option>
+                                <option value="bi bi-check-circle fs-1">Emissions Testing</option>
                               </select>
                             </div>
                             <div class="form-group">
@@ -79,7 +96,7 @@
                             </div>
                             <div class="form-group">
                               <label for="wcuText">WCU text</label>
-                              <input type="text" id="wcuText" name="wcuText" class="form-control" required>
+                              <textarea name="wcuText" class="form-control" id="wcuText" rows="4" cols="80"></textarea>
                             </div>
                             <div class="form-group">
                               <label for="heading">Heading</label>
@@ -93,7 +110,7 @@
                             <button type="submit" class="btn btn-primary btn-sm">Add Service</button>
                           </form>
                         </div>
-                        <div class="col-8">
+                        <div class="col-6">
                           <h5>Manage Service</h5>
                           <div id="loadService">
 
@@ -122,7 +139,7 @@
         <?php include("layout/footer.php"); ?>
         <script type="text/javascript">
         $('#loadService').load('ajax/loadservice.php');
-        
+
 
         function openserviceEditModal(id){
           $('#serviceEditModal').modal('show');

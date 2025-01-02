@@ -56,6 +56,8 @@ if(!isset($_SESSION['admin_id'])){
 
 
 <link rel="stylesheet" href="assets/libs/apexcharts/apexcharts.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+
 
 </head>
 
@@ -314,17 +316,9 @@ if(!isset($_SESSION['admin_id'])){
 
 												<!-- Customer Management -->
 												<li class="slide">
-												    <a href="customermanagement.php" class="side-menu__item">
+												    <a href="addCustomer.php" class="side-menu__item">
 												        <i class="ri-user-heart-line side-menu__icon"></i>
 												        <span class="side-menu__label">Customer Management</span>
-												    </a>
-												</li>
-
-												<!-- Point of Sale (POS) -->
-												<li class="slide">
-												    <a href="pos.php" class="side-menu__item">
-												        <i class="ri-shopping-cart-line side-menu__icon"></i>
-												        <span class="side-menu__label">Point of Sale (POS)</span>
 												    </a>
 												</li>
 
