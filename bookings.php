@@ -112,28 +112,39 @@
                                     $completion_date = date('Y-m-d', strtotime("$start_date + $total_days days"));
                                     $estimated_completion = "$total_days days from $start_date ($completion_date)";
 
-                                    // Determine status
-                                    $status = match ($row['status']) {
-                                        1 => "Pending",
-                                        2 => "In Progress",
-                                        3 => "Completed",
-                                        default => "Unknown",
-                                    };
                             ?>
                             <tr>
-                                <td><?= htmlspecialchars($row['customer_name']) ?></td>
-                                <td><?= htmlspecialchars($row['vehicle_type'] . " (" . $row['number_plate'] . ")") ?></td>
-                                <td><?= htmlspecialchars($servicesList) ?></td>
-                                <td>LKR <?= number_format($row['total_bill'], 2) ?></td>
-                                <td><?= htmlspecialchars($estimated_completion) ?></td>
-                                <td><?= htmlspecialchars($start_date) ?></td>
-                                <td><?= htmlspecialchars($row['employee_name']) ?></td>
-                                <td><?= htmlspecialchars($status) ?></td>
-                                <td>
-                                    <a href="edit_booking.php?id=<?= $booking_id ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="delete_booking.php?id=<?= $booking_id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
-                                </td>
-                            </tr>
+    <td><?= htmlspecialchars($row['customer_name']) ?></td>
+    <td><?= htmlspecialchars($row['vehicle_type'] . " (" . $row['number_plate'] . ")") ?></td>
+    <td><?= htmlspecialchars($servicesList) ?></td>
+    <td><?= number_format($row['total_bill'], 2) ?></td>
+    <td><?= htmlspecialchars($estimated_completion) ?></td>
+    <td><?= htmlspecialchars($start_date) ?></td>
+    <td><?= htmlspecialchars($row['employee_name']) ?></td>
+    <td>
+        <?php
+        switch ((int)$row['status']) {
+            case 1:
+                echo "<a href='backend/update_status.php?id={$row['booking_id']}&status=2' class='btn btn-primary btn-sm'>Pending</a>";
+                break;
+            case 2:
+                echo "<a href='backend/update_status.php?id={$row['booking_id']}&status=3' class='btn btn-warning btn-sm'>In Progress</a>";
+                break;
+            case 3:
+                echo "<span class='btn btn-success btn-sm disabled'>Completed</span>";
+                break;
+            default:
+                echo "<span class='btn btn-secondary btn-sm disabled'>Unknown</span>";
+        }
+        ?>
+    </td>
+    <td>
+        <a href="edit_booking.php?id=<?= $booking_id ?>" class="btn btn-warning btn-sm">Edit</a>
+        <a href="delete_booking.php?id=<?= $booking_id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+    </td>
+</tr>
+
+
                             <?php
                                 }
                             } else {
