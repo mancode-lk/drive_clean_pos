@@ -222,11 +222,6 @@
     </div>
     <br>
     <div class="form-group">
-        <label for="">Total Price</label>
-        <input type="text" class="form-control" name="total_price" value="" required>
-    </div>
-    <br>
-    <div class="form-group">
         <label for="">Estimated Date To Complete</label>
         <input type="datetime-local" class="form-control" name="date_time_to_complete" value="" required>
     </div>
