@@ -139,7 +139,10 @@
         ?>
     </td>
     <td>
-        <a href="edit_booking.php?id=<?= $booking_id ?>" class="btn btn-warning btn-sm">Edit</a>
+    <a href="backend/edit_booking_status.php?id=<?= $booking_id ?>" class="btn btn-secondary btn-sm"><i class="ri-restart-line"></i></a>
+    </td>
+    <td>
+        <a onclick="openModalEditBooking(<?= $booking_id ?>)" class="btn btn-warning btn-sm">Edit</a>
         <a href="delete_booking.php?id=<?= $booking_id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
     </td>
 </tr>
@@ -268,6 +271,18 @@
               </div>
             </div>
         </div>
+
+
+        
+        <div class="modal fade" id="editBookingModal" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" id="editBookingForm">
+                
+              </div>
+            </div>
+        </div>
+
+
         <?php include("layout/footer.php"); ?>
 
 <script type="text/javascript">
@@ -280,5 +295,20 @@
         c_id: cus_id
     });
   }
+
+  function showVehicless(cus_id){
+    // $('#showVehicles').load('ajax/loadVehicles.php', {
+    //     c_id: cus_id
+    // });
+    alert();
+  }
+
+  function openModalEditBooking(b_id){
+    $('#editBookingModal').modal('show');
+    $('#editBookingForm').load('ajax/editBooking.php', {
+        booking_id: b_id
+    });
+  }
+
 
 </script>
