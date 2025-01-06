@@ -330,6 +330,13 @@ if(!isset($_SESSION['admin_id'])){
 												    </a>
 												</li>
 
+                                                <li class="slide">
+												    <a href="webManagement.php" class="side-menu__item">
+												        <i class="ri-global-line side-menu__icon"></i>
+												        <span class="side-menu__label">Web Management</span>
+												    </a>
+												</li>
+
 
                         <!-- End::slide -->
 
