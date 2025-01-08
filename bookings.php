@@ -121,6 +121,7 @@
     <td><?= htmlspecialchars($estimated_completion) ?></td>
     <td><?= htmlspecialchars($start_date) ?></td>
     <td><?= htmlspecialchars($row['employee_name']) ?></td>
+
     <td>
         <?php
         switch ((int)$row['status']) {
@@ -142,9 +143,11 @@
     <a href="backend/edit_booking_status.php?id=<?= $booking_id ?>" class="btn btn-secondary btn-sm"><i class="ri-restart-line"></i></a>
     </td>
     <td>
-        <a onclick="openModalEditBooking(<?= $booking_id ?>)" class="btn btn-warning btn-sm">Edit</a>
-        <a href="delete_booking.php?id=<?= $booking_id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
-    </td>
+      <a onclick="openModalEditBooking(<?= $booking_id ?>)" class="btn btn-warning btn-sm">Edit</a>
+      <a href="delete_booking.php?id=<?= $booking_id ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this booking?');">Delete</a>
+      <a href="bill_print.php?booking_id=<?= $booking_id ?>" target="_blank" class="btn btn-info btn-sm">Bill Print</a>
+  </td>
+
 </tr>
 
 
@@ -273,11 +276,11 @@
         </div>
 
 
-        
+
         <div class="modal fade" id="editBookingModal" tabindex="-1" aria-labelledby="searchModal" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content" id="editBookingForm">
-                
+
               </div>
             </div>
         </div>
