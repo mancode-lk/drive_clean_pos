@@ -26,17 +26,17 @@ $rowBook = $rs->fetch_assoc();
                             $row = $rs->fetch_assoc();
                             $customer_name = htmlspecialchars($row['customer_name']);
                         ?>
-                            <input 
-                                type="text" 
-                                class="form-control" 
-                                name="customer_id" 
-                                value="<?= $customer_name ?>" 
-                                onfocus="this.setAttribute('disabled', true); showVehicless('<?= $customer_id ?>');" 
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="customer_id"
+                                value="<?= $customer_name ?>"
+                                onfocus="this.setAttribute('disabled', true); showVehicless('<?= $customer_id ?>');"
                                 disabled>
                         <?php
                             }
                             ?>
-                      
+
                         <br>
                         <div id="showVehicles"></div>
                         <br>
@@ -64,42 +64,50 @@ $rowBook = $rs->fetch_assoc();
                                 while ($rowSer = $rsSer->fetch_assoc()) {
                                     $serviceId = $rowSer['ser_id'];
                                     $isChecked = in_array($serviceId, $bookedServices) ? 'checked' : ''; // Check if the service is already booked
+                                    $estimated_duration ="";
+                                    $sqlCheck ="SELECT * FROM booked_services WHERE booking_id='$booking_id' AND service_id='$serviceId'";
+                                    $rsCheck = $conn->query($sqlCheck);
+                                    if($rsCheck->num_rows > 0){
+                                      $rowCheck = $rsCheck->fetch_assoc();
+                                      $estimated_duration =$rowCheck['estimated_duration'];
+                                    }
+
                             ?>
                                     <div class="col-md-6">
                                         <div class="form-check">
-                                            <input 
-                                                type="checkbox" 
-                                                style="width:20px;height:20px;" 
-                                                class="form-check-input" 
-                                                id="service<?= $serviceId ?>" 
-                                                name="services[<?= $serviceId ?>][id]" 
-                                                value="<?= $serviceId ?>" 
+                                            <input
+                                                type="checkbox"
+                                                style="width:20px;height:20px;"
+                                                class="form-check-input"
+                                                id="service<?= $serviceId ?>"
+                                                name="services[<?= $serviceId ?>][id]"
+                                                value="<?= $serviceId ?>"
                                                 <?= $isChecked ?>>
                                             &nbsp;
-                                            <label 
-                                                class="form-check-label" 
-                                                for="service<?= $serviceId ?>" 
+                                            <label
+                                                class="form-check-label"
+                                                for="service<?= $serviceId ?>"
                                                 style="font-size:15px;font-weight:bold;">
                                                 <?= htmlspecialchars($rowSer['service_name']) ?>
                                             </label>
                                         </div>
                                         <div class="form-group mt-2">
                                             <label for="price">Price</label>
-                                            <input 
-                                                type="number" 
-                                                step="0.01" 
-                                                class="form-control" 
-                                                name="services[<?= $serviceId ?>][price]" 
-                                                value="<?= htmlspecialchars($rowSer['price']) ?>" 
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                class="form-control"
+                                                name="services[<?= $serviceId ?>][price]"
+                                                value="<?= htmlspecialchars($rowSer['price']) ?>"
                                                 placeholder="Enter Price">
                                         </div>
                                         <div class="form-group mt-2">
-                                            <label for="duration">Estimated Duration (in minutes)</label>
-                                            <input 
-                                                type="number" 
-                                                class="form-control" 
-                                                name="services[<?= $serviceId ?>][duration]" 
-                                                placeholder="Enter Duration">
+                                            <label for="duration">Estimated Duration (in days)</label>
+                                            <input
+                                                type="number"
+                                                class="form-control"
+                                                name="services[<?= $serviceId ?>][duration]"
+                                                placeholder="Enter Duration" value="<?= $estimated_duration ?>">
                                         </div>
                                         <hr>
                                     </div>
@@ -111,18 +119,6 @@ $rowBook = $rs->fetch_assoc();
                             ?>
                         </div>
                     </div>
-
-                    <br>
-                    <div class="form-group">
-                        <label for="">Estimated Date To Complete</label>
-                        <input type="datetime-local" class="form-control" name="date_time_to_complete" value="" required>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="">Booked Date & Time</label>
-                        <input type="datetime-local" class="form-control" name="booked_datetime" value="" required>
-                    </div>
-                    <br>
                     <div class="form-group">
                         <label for="">Staff Who Is handling</label>
                         <select class="form-control" name="emp_id" required>
@@ -146,5 +142,3 @@ $rowBook = $rs->fetch_assoc();
 
                   <hr>
                 </div>
-
-                

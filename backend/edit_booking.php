@@ -5,19 +5,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Booking data
     $booking_id = isset($_POST['booking_id']) ? intval($_POST['booking_id']) : null;
     $employee_id = $_POST['emp_id'];
-    $start_date = $_POST['booked_datetime'];
     $status = 1; // Default status (e.g., "pending")
     $date_time_to_complete = isset($_POST['date_time_to_complete']) ? $_POST['date_time_to_complete'] : null;
 
     if ($booking_id) {
         // Update existing booking
         $sqlBooking = "
-            UPDATE tbl_booking 
-            SET 
-                employee_id = ?, 
-                start_date = ?, 
+            UPDATE tbl_booking
+            SET
+                employee_id = ?,
+                start_date = ?,
                 status = ?
-            WHERE 
+            WHERE
                 booking_id = ?";
         $stmt = $conn->prepare($sqlBooking);
         $stmt->bind_param('isii', $employee_id, $start_date, $status, $booking_id); // Corrected type definition
@@ -33,12 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($booking_id) {
         // Clear previous services for existing bookings
-        if ($_POST['services']) {
-            $sqlDeleteServices = "DELETE FROM booked_services WHERE booking_id = ?";
-            $stmtDelete = $conn->prepare($sqlDeleteServices);
-            $stmtDelete->bind_param('i', $booking_id);
-            $stmtDelete->execute();
-        }
+
 
         // Process selected services
         if (!empty($_POST['services']) && is_array($_POST['services'])) {
@@ -49,17 +43,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 $service_id = intval($service['id']);
-                $price = floatval($service['price']);
-                $duration = !empty($service['duration']) ? intval($service['duration']) : null;
+                  $price = floatval($service['price']);
+                  $duration = isset($service['duration']) ? intval($service['duration']) : null;
 
-                $sqlService = "
-                    INSERT INTO booked_services (booking_id, service_id, price, estimated_duration, booked_datetime) 
-                    VALUES (?, ?, ?, ?, ?)";
-                $stmtService = $conn->prepare($sqlService);
-                $stmtService->bind_param('iidss', $booking_id, $service_id, $price, $duration, $start_date);
-                $stmtService->execute();
+                  // Prepare the query for fetching the booked_datetime
+                  $btVar = date('Y-m-d H:i:s'); // Default to current date-time
+                        $sqlDateTime = "SELECT * FROM booked_services WHERE booking_id = ? AND service_id = ?";
+                        $stmtDateTime = $conn->prepare($sqlDateTime);
+                        $stmtDateTime->bind_param('ii', $booking_id, $service_id);
+                        $stmtDateTime->execute();
+                        $resultDateTime = $stmtDateTime->get_result();
+                        echo $sqlDateTime."<br>";
+                          echo $booking_id."<br>";
+                            echo $service_id."<br>";
+                        exit();
+
+                        if ($resultDateTime->num_rows > 0) {
+                            $rowDateTime = $resultDateTime->fetch_assoc();
+                            $btVar = $rowDateTime['booked_datetime'];
+                        }
+
+                        $sqlService = "
+                            INSERT INTO booked_services (booking_id, service_id, price, estimated_duration, booked_datetime)
+                            VALUES (?, ?, ?, ?, ?)";
+                        $stmtService = $conn->prepare($sqlService);
+                        $stmtService->bind_param('iidss', $booking_id, $service_id, $price, $duration, $btVar);
+                        $stmtService->execute();
             }
         } else {
+          if ($_POST['services']) {
+              $sqlDeleteServices = "DELETE FROM booked_services WHERE booking_id = ?";
+              $stmtDelete = $conn->prepare($sqlDeleteServices);
+              $stmtDelete->bind_param('i', $booking_id);
+              $stmtDelete->execute();
+          }
             // Handle case where no services are selected
             header('Location: ../bookings.php?error=No services selected');
             exit();
